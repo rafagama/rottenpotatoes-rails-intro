@@ -14,10 +14,6 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
-  def test_lista
-    @movies = Movie.all.movies.sort
-  end
-
   def new
     # default: render 'new' template
   end
