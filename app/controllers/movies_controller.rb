@@ -18,13 +18,13 @@ class MoviesController < ApplicationController
       @checked = Movie.init_checked
     end
 
-    #check_session
-    #check_params
+    check_session
+    check_params
   
     # if there is a rating key, then filter movies
-    #if session.has_key?(:ratings)
-    #  filter_movies(session[:ratings])
-    #end
+    if session.has_key?(:ratings)
+      filter_movies(session[:ratings])
+    end
 
     # if there is a sort_by key, then sort movies
     #if session.has_key?(:sort_by)
