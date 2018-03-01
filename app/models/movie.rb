@@ -5,13 +5,12 @@ class Movie < ActiveRecord::Base
         return @ratings
     end
     
-    def self.is_checked_init
-        @is_checked = Hash.new
-        @ratings.each do |x|
-            @is_checked[x] = true
-        end
-        return @is_checked
-    end
+#    def self.is_checked_init
+ ##      @ratings.each do |x|
+   #         @is_checked[x] = true
+    #    end
+     #   return @is_checked
+    #end
 
 #    def self.update_is_checked(keys)
  #       @ratings.each do |x|
