@@ -19,11 +19,11 @@ class MoviesController < ApplicationController
     end
 
     check_session
-    check_params
+    #check_params
   
     # if there is a rating key, then filter movies
     if session.has_key?(:ratings)
-      filter_movies(session[:ratings])
+      filter_movies
     end
 
     # if there is a sort_by key, then sort movies
@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
     end
   end
   
-  def filter_movies(ratings)
+  def filter_movies
     @checked = Movie.update_checked(params[:ratings]) 
     keys = params[:ratings].keys
     @movies = Movie.where(rating: keys)
