@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @all_ratings = Movie.ratings.all
     
     if params.has_key?(:sort_by)
       #session[:sort_by] = params[:sort_by]
