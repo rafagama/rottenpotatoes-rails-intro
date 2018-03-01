@@ -23,18 +23,18 @@ class MoviesController < ApplicationController
 #      @movies = Movie.where(rating: keys)
 #    end
     
-#    if params.has_key?(:sort_by)
-#      if params[:sort_by] == "title"
-#        @movies = Movie.order(params[:sort_by]).all
-#        @hilite_title = "hilite"
-#      elsif params[:sort_by] == "release_date"
-#        @movies = Movie.order(params[:sort_by]).reverse_order.all
-#        @hilite_release_date = "hilite"
-#      end
-#    else
-#      @movies = Movie.all
-#    end
-#  end
+    if params.has_key?(:sort_by)
+      if params[:sort_by] == "title"
+        @movies = Movie.order(params[:sort_by]).all
+        @hilite_title = "hilite"
+      elsif params[:sort_by] == "release_date"
+        @movies = Movie.order(params[:sort_by]).reverse_order.all
+        @hilite_release_date = "hilite"
+      end
+    else
+      @movies = Movie.all
+    end
+  end
 
   def new
     # default: render 'new' template
