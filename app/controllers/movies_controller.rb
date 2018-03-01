@@ -44,20 +44,20 @@ class MoviesController < ApplicationController
     end
   end
   
-  def check_params
-    if (session.has_key?(:ratings) ^ params.has_key?(:ratings)) ||
-          (session.has_key?(:sort_by) ^ params.has_key?(:sort_by))
-      parameters = Hash.new
-      parameters[:ratings] = session[:ratings]
-      parameters[:sort_by] = session[:sort_by]
+#  def check_params
+#    if (session.has_key?(:ratings) ^ params.has_key?(:ratings)) ||
+#          (session.has_key?(:sort_by) ^ params.has_key?(:sort_by))
+#      parameters = Hash.new
+#      parameters[:ratings] = session[:ratings]
+#      parameters[:sort_by] = session[:sort_by]
 
       # forces flash to keep message
-      flash.keep
+#      flash.keep
     
       # redirect with the proper params, to keep RESTfulness
-      redirect_to movies_path(parameters)
-    end
-  end
+#      redirect_to movies_path(parameters)
+#    end
+#  end
   
   def filter_movies(ratings)
     @checked = Movie.update_checked(params[:ratings]) 
