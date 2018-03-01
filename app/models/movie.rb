@@ -13,15 +13,15 @@ class Movie < ActiveRecord::Base
         return @is_checked
     end
 
-    def self.update_is_checked(keys)
-        @ratings.each do |x|
-            if keys.include?(x)
-                @is_checked[x] = true
-            else
-                @is_checked[x] = false
-            end
-        end
-        return @is_checked
-    end
+#    def self.update_is_checked(keys)
+ #       @ratings.each do |x|
+  #          if keys.include?(x)
+   #             @is_checked[x] = true
+    #        else
+     #           @is_checked[x] = false
+      #      end
+       # end
+        #return @is_checked
+    #end
 
 end
