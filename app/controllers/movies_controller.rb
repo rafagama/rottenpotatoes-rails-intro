@@ -13,17 +13,15 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.ratings
     
-#    if @checked == nil 
-#      @checked = Movie.all_checked 
-#    end
-    
-#    if params.has_key?(:ratings) 
-#      @checked = Movie.get_checked(params[:ratings]) 
-#      keys = params[:ratings].keys
-#      @movies = Movie.where(rating: keys)
-#    end
-    
-    if params.has_key?(:sort_by)
+    if @checked == nil 
+      @checked = Movie.init_checked 
+    end
+  
+    if params.has_key?(:ratings) 
+      @checked = Movie.update_checked(params[:ratings]) 
+      keys = params[:ratings].keys
+      @movies = Movie.where(rating: keys)
+    elsif params.has_key?(:sort_by)
       if params[:sort_by] == "title"
         @movies = Movie.order(params[:sort_by]).all
         @hilite_title = "hilite"
