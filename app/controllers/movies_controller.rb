@@ -15,7 +15,15 @@ class MoviesController < ApplicationController
     
     if params.has_key?(:sort_by)
       #session[:sort_by] = params[:sort_by]
-      @movies = Movie.order(params[:sort_by]).all
+      if params[:sort_by] == "title"
+        @movies = Movie.order(params[:sort_by]).all
+        #@hilite_title = "hilite"
+        #@hilite_release_date = ""
+      elsif params[:sort_by] == "release_date"
+        @movies = Movie.order(params[:sort_by]).reverse.all
+        #@hilite_title = ""
+        #@hilite_release_date = "hilite"
+      end
     end
   end
 
