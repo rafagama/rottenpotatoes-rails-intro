@@ -18,11 +18,11 @@ class MoviesController < ApplicationController
       @checked = Movie.init_checked
     end
 
-    check_session
+    update_session
     #check_params
   
     # if there is a rating key, then filter movies
-    if session.has_key?(:ratings)
+    if params.has_key?(:ratings)
       filter_movies
     end
 
