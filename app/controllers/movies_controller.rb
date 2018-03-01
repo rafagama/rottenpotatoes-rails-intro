@@ -19,6 +19,7 @@ class MoviesController < ApplicationController
     end
 
     check_session
+    check_params
   
     # if there is a rating key, then filter movies
     if session.has_key?(:ratings)
@@ -31,26 +32,31 @@ class MoviesController < ApplicationController
     end
   end
   
-  def check_session
+  
+  def update_session
     # Overwrite old session with new param rating or get session param
     if params.has_key?(:ratings) 
       session[:ratings] = params[:ratings]
-    else
-      params[:ratings] = session[:ratings]
     end
-    
     # Overwrite old session with new param sort_by or get session param
     if params.has_key?(:sort_by) 
       session[:sort_by] = params[:sort_by]
-    else
-      params[:sort_by] = session[:sort_by]
     end
+  end
+  
+  def check_params
+    if (session.has_key?(:ratings) ^ params.has_key?(:ratings)) ||
+          (session.has_key?(:sort_by) ^ params.has_key?(:sort_by))
+      parameters = Hash.new
+      parameters[:ratings] = session[:ratings]
+      parameters[:sort_by] = session[:sort_by]
+
+      # forces flash to keep message
+      flash.keep
     
-    # forces flash to keep message
-    flash.keep
-    
-    # redirect with the proper params, to keep RESTfulness
+      # redirect with the proper params, to keep RESTfulness
       redirect_to movies_path(parameters)
+    end
   end
   
   def filter_movies(ratings)
