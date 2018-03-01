@@ -65,15 +65,15 @@ class MoviesController < ApplicationController
     @movies = Movie.where(rating: keys)
   end
   
-  def sort_movies(type)
-    if type == "title"
-      @movies = @movies.sort {|a, b| a.title <=> b.tite}
-      @hilite_title = "hilite"
-    elsif type == == "release_date"
-      @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}.reverse
-      @hilite_release_date = "hilite"
-    end
-  end
+#  def sort_movies(type)
+#    if type == "title"
+#      @movies = @movies.sort {|a, b| a.title <=> b.tite}
+#      @hilite_title = "hilite"
+#    elsif type == == "release_date"
+#      @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}.reverse
+#      @hilite_release_date = "hilite"
+#    end
+#  end
 
   def new
     # default: render 'new' template
