@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
     end
 
     update_session
-    #check_params
+    check_params
   
     # if there is a rating key, then filter movies
     if params.has_key?(:ratings)
