@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
         #@hilite_title = "hilite"
         #@hilite_release_date = ""
       elsif params[:sort_by] == "release_date"
-        @movies = Movie.order(params[:sort_by]).reverse.all
+        @movies = Movie.order(params[:sort_by]).reverse_order.all
         #@hilite_title = ""
         #@hilite_release_date = "hilite"
       end
