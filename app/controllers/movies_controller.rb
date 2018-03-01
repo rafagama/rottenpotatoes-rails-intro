@@ -17,6 +17,8 @@ class MoviesController < ApplicationController
     if @checked == nil
       @checked = Movie.init_checked
     end
+
+    check_session
   
     # if there is a rating key, then filter movies
     if session.has_key?(:ratings)
