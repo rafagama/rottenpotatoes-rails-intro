@@ -14,7 +14,8 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     
     if params.has_key?(:sort_by)
-      session[:sort_by] = params[:sort_by]
+      #session[:sort_by] = params[:sort_by]
+      @movies = Movie.order(params[:sort_by]).all
     end
   end
 
