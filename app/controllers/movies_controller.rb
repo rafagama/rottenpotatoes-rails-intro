@@ -67,7 +67,7 @@ class MoviesController < ApplicationController
   
   def sort_movies
     if params[:sort_by] == "title"
-      @movies = @movies.sort {|a, b| a.title <=> b.tite}
+      @movies = @movies.sort {|a, b| a.title <=> b.title}
       @hilite_title = "hilite"
     elsif params[:sort_by] == "release_date"
       @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}.reverse
