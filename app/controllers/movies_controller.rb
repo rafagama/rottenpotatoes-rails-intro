@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
 
     # if there is a sort_by key, then sort movies
     if params.has_key?(:sort_by)
-      sort_movies(session[:sort_by])
+      sort_movies
     end
   end
   
@@ -65,12 +65,12 @@ class MoviesController < ApplicationController
     @movies = Movie.where(rating: keys)
   end
   
-  def sort_movies(type)
-    if type == "title"
+  def sort_movies
+    if params[:sort_by] == "title"
       @movies = @movies.sort {|a, b| a.title <=> b.tite}
       @hilite_title = "hilite"
-    elsif type == == "release_date"
-      @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}
+    elsif params[:sort_by] == "release_date"
+      @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}.reverse
       @hilite_release_date = "hilite"
     end
   end
