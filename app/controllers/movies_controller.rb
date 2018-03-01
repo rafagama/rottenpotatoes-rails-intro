@@ -11,7 +11,6 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
     @all_ratings = Movie.ratings
     
     if params.has_key?(:sort_by)
@@ -25,6 +24,8 @@ class MoviesController < ApplicationController
         #@hilite_title = ""
         @hilite_release_date = "hilite"
       end
+    else
+      @movies = Movie.all
     end
   end
 
