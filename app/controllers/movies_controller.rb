@@ -12,25 +12,52 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.ratings
+    @movies = Movie.all
     
-    if @checked == nil 
-      @checked = Movie.init_checked 
-    end
+    if @checked == nil ; @checked = Movie.init_checked ; end
   
+    # if there is a rating key, then filter movies
+    if session.has_key?(:ratings) ; filter_movies(session[:ratings]) ; end
+
+    # if there is a sort_by key, then sort movies
+    if session.has_key?(:sort_by) ; sort_movies(session[:sort_by]) ; end
+  end
+  
+  def check_session
+    # Overwrite old session with new param rating or get session param
     if params.has_key?(:ratings) 
-      @checked = Movie.update_checked(params[:ratings]) 
-      keys = params[:ratings].keys
-      @movies = Movie.where(rating: keys)
-    elsif params.has_key?(:sort_by)
-      if params[:sort_by] == "title"
-        @movies = Movie.order(params[:sort_by]).all
-        @hilite_title = "hilite"
-      elsif params[:sort_by] == "release_date"
-        @movies = Movie.order(params[:sort_by]).reverse_order.all
-        @hilite_release_date = "hilite"
-      end
+      session[:ratings] = params[:ratings]
     else
-      @movies = Movie.all
+      params[:ratings] = session[:ratings]
+    end
+    
+    # Overwrite old session with new param sort_by or get session param
+    if params.has_key?(:sort_by) 
+      session[:sort_by] = params[:sort_by]
+    else
+      params[:sort_by] = session[:sort_by]
+    end
+    
+    # forces flash to keep message
+    flash.keep
+    
+    # redirect with the proper params, to keep RESTfulness
+      redirect_to movies_path(parameters)
+  end
+  
+  def filter_movies(ratings)
+    @checked = Movie.update_checked(params[:ratings]) 
+    keys = params[:ratings].keys
+    @movies = Movie.where(rating: keys)
+  end
+  
+  def sort_movies(type)
+    if type == "title"
+      @movies = @movies.sort {|a, b| a.title <=> b.tite}
+      @hilite_title = "hilite"
+    elsif type == == "release_date"
+      @movies = @movies.sort {|a, b| a.release_date <=> b.release_date}.reverse
+      @hilite_release_date = "hilite"
     end
   end
 
