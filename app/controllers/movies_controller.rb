@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.ratings
     
-    if !@checked == nil; @checked = Movie.all_checked; end;
+    if @checked == nil; @checked = Movie.all_checked; end;
     
     if params.has_key?(:ratings); @checked = Movie.get_checked(params[:ratings]); end;
     
